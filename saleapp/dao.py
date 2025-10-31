@@ -1,11 +1,14 @@
 import json
+from models import Category, Product
 
-def load_catagories():
-    with open("data/category.json", encoding='utf-8') as f:
-        return json.load(f)
+def load_categories():
+    # with open("data/category.json", encoding="utf-8") as f:
+    #     return json.load(f)
+    return Category.query.all()
 
-def load_products(q = None, cate_id = None):
-    with open("data/product.json", encoding='utf-8') as f:
+
+def load_products(q=None, cate_id=None):
+    with open("data/product.json", encoding="utf-8") as f:
         products = json.load(f)
 
         if q:
@@ -17,12 +20,15 @@ def load_products(q = None, cate_id = None):
         return products
 
 def get_product_by_id(id):
-    with open("data/product.json", encoding='utf-8') as f:
-        products = json.load(f)
+    # with open("data/product.json", encoding="utf-8") as f:
+    #     products = json.load(f)
+    #
+    #     for p in products:
+    #         if p["id"].__eq__(id):
+    #             return p
+    #
+    # return None
+    return Product.query.get(id)
 
-        for p in products:
-            if p["id"].__eq__(id):
-                return p
-
-if __name__ == "__main__":
+if __name__=="__main__":
     print(get_product_by_id(2))
